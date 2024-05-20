@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\ProdiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,4 +38,4 @@ Route::get("/mahasiswa/selectElq", [MahasiswaController::class, 'selectElq']);
 
 
 Route::get("/mahasiswa/index", [MahasiswaController::class, 'index']);
-
+Route::get('/prodi/all-join-facade', [ProdiController::class, 'allJoinFacade']);

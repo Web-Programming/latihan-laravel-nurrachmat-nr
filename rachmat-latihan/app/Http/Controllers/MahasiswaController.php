@@ -93,6 +93,7 @@ class MahasiswaController extends Controller
         $mhs->tanggal_lahir = '2002-02-02';
         $mhs->tempat_lahir = 'Padang';
         $mhs->alamat = 'Jl. Padang Selasa';
+        $mhs->prodi_id = 1;
         $mhs->save(); //insert into .....
 
         dump($mhs);
