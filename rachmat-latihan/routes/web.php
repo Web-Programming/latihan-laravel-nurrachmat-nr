@@ -39,3 +39,5 @@ Route::get("/mahasiswa/selectElq", [MahasiswaController::class, 'selectElq']);
 
 Route::get("/mahasiswa/index", [MahasiswaController::class, 'index']);
 Route::get('/prodi/all-join-facade', [ProdiController::class, 'allJoinFacade']);
+Route::get('/prodi/all-join-elq', [ProdiController::class, 'allJoinElq']);
+Route::get('/mahasiswa/all-join-elq', [MahasiswaController::class, 'allJoinElq']);

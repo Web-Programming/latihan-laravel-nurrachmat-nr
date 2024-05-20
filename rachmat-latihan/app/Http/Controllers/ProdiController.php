@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Prodi;
 use DB;
 use Illuminate\Http\Request;
 
@@ -22,4 +23,20 @@ class ProdiController extends Controller
         );
         return view('prodi.index', ['allmahasiswaprodi' => $result]);
     }
+
+    public function allJoinElq(){
+        $prodis = Prodi::with("mahasiswas")->get();
+        // foreach($prodis as $prodi){
+        //     echo "<h3>{$prodi->nama}</h3>";
+        //     echo "<hr/>Mahasiswa :  ";
+        //     foreach($prodi->mahasiswas as $mhs){
+        //         echo $mhs->nama_mahasiswa .", ";
+        //     }
+        //     echo "<hr/>";
+        // }
+
+        return $prodis;
+    }
+
+
 }

@@ -180,4 +180,11 @@ class MahasiswaController extends Controller
     {
         //
     }
+
+
+    public function allJoinElq(){
+        $mahasiswa = Mahasiswa::get();
+
+        return $mahasiswa;
+    }
 }
