@@ -41,3 +41,15 @@ Route::get("/mahasiswa/index", [MahasiswaController::class, 'index']);
 Route::get('/prodi/all-join-facade', [ProdiController::class, 'allJoinFacade']);
 Route::get('/prodi/all-join-elq', [ProdiController::class, 'allJoinElq']);
 Route::get('/mahasiswa/all-join-elq', [MahasiswaController::class, 'allJoinElq']);
+
+//RETRIVE PRODI
+Route::get('/prodi', [ProdiController::class,'index'])
+    ->name('prodi.index'); //list
+//CREATE PRODI
+Route::get('/prodi/create', [ProdiController::class, 'create'])
+    ->name('prodi.create');
+Route::post("/prodi/store", [ProdiController::class, "store"])
+    ->name('prodi.store');
+//RETRIVE PRODI
+Route::get('/prodi/{id}', [ProdiController::class,'show'])
+    ->name('prodi.show'); //single
