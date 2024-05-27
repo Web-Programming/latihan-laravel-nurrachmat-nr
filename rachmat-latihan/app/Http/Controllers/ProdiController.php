@@ -25,15 +25,36 @@ class ProdiController extends Controller
     public function store(Request $request){
         //dump($request);
         //echo $request->nama;
-        $validateData = $request->validate(
-            ['nama' => 'required|min:5|max:20']
+        /*$validateData = $request->validate(
+            [
+                'nama' => 'required|min:5|max:20',
+                'foto' => 'required|file|mimes:png|extensions:png|max:5000'
+            ],
+        );*/
+        $this->validate($request,
+            [
+                'nama' => 'required|min:5|max:20',
+                'foto' => 'required|file|mimes:png|max:5000'
+            ],
+            [
+                'required' => 'Kolom :attribute harus diisi',
+                'min' => 'Kolom :attribute harus diisi minimal :min karakter',
+                'mimes' => 'File yang diperbolehkan hanya png'
+            ]
         );
+
+        //menyipkan namafile
+        $ext = $request->foto->getClientOriginalExtension(); //jpg/png
+        $nama_file = "foto-".time().".".$ext; //foto-121521425.png
+        $path = $request->foto->storeAs('public', $nama_file);
 
         //dump($validatData);
         //echo $validatData['nama'];
 
         $prodi = new Prodi();
-        $prodi->nama = $validateData['nama'];
+        //$prodi->nama = $validateData['nama'];
+        $prodi->nama = $request->nama;
+        $prodi->foto = $nama_file;
         $prodi->save();
 
         $request->session()->flash('info', "Data prodi $prodi->nama berhasil disimpan");
