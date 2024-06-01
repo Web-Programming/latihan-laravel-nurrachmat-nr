@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\ProdiController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,3 +63,22 @@ Route::patch('/prodi/{prodi}', [ProdiController::class, 'update'])
     ->name('prodi.update');
 Route::delete('/prodi/{prodi}', [ProdiController::class, 'destroy'])
     ->name('prodi.destroy');
+
+
+//Custom Auth
+Route::get("login", [AuthController::class, 'index'])->name('login');
+Route::post("proses_login", [AuthController::class, 'proses_login'])->name('proses_login');
+Route::get("logout", [AuthController::class, 'logout'])->name('logout');
+Route::get("register", [AuthController::class, 'register'])->name('register');
+Route::post("proses_register", [AuthController::class, 'proses_register'])->name('proses_register');
+
+// gunakan midleware group auth
+Route::group(['middleware' => 'auth'], function(){
+    Route::group(['middleware' => 'cek_login:admin'], function(){
+        Route::resource('admin', AdminController::class);
+    });
+
+    Route::group(['middleware' => 'cek_login:user'], function(){
+        Route::resource('user', UserController::class);
+    });
+});
